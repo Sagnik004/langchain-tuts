@@ -64,5 +64,3 @@ while True:
   chat_history.add_ai_message(ai_response.content)
 
   print(f"AI: {ai_response.content}")
-
-# https://www.youtube.com/watch?v=VXtkSQVab1g&list=PLNIQLFWpQMRU1Ayjc-LX2k01Jj7uDG0rU&index=12
