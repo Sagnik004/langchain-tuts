@@ -1,3 +1,5 @@
+# Reference: https://youtu.be/CY-1bZ3OMjw?list=PLNIQLFWpQMRU1Ayjc-LX2k01Jj7uDG0rU
+
 import os
 
 from dotenv import load_dotenv
