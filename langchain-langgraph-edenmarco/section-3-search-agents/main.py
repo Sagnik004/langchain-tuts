@@ -37,11 +37,14 @@ agent = create_react_agent(
     llm=llm, tools=tools, prompt=react_prompt_with_format_instructions
 )
 
-# Agent runtime
+# Agent runtime, extract the output coming from agent executor, parse the output into a Pydantic object
 agent_executor = AgentExecutor(
     agent=agent, tools=tools, verbose=True, handle_parsing_errors=True
 )
-chain = agent_executor
+extract_output = RunnableLambda(lambda x: x["output"])
+parse_output = RunnableLambda(lambda x: output_parser.parse(x))
+
+chain = agent_executor | extract_output | parse_output
 
 
 def main():
