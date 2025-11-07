@@ -46,7 +46,9 @@ extract_output = RunnableLambda(lambda x: x["output"])
 # parse_output = RunnableLambda(lambda x: output_parser.parse(x))
 
 # chain = agent_executor | extract_output | parse_output
-chain = agent_executor | extract_output | structured_llm      # structured_llm will convert the text output into Pydantic structured data
+chain = (
+    agent_executor | extract_output | structured_llm
+)  # structured_llm will convert the text output into Pydantic structured data
 
 
 def main():
