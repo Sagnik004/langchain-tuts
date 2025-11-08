@@ -10,7 +10,7 @@
 
 ## Other Useful Resources
 
-- [Tool Calling with LangChain](https://blog.langchain.com/tool-calling-with-langchain/)
+- [Tools](https://docs.langchain.com/oss/python/langchain/tools)
 
 ### ReAct Agent Framework under the hood
 ![ReAct Agent Framework under the hood](/images/react-agent-under-the-hood.png)
