@@ -11,6 +11,8 @@ from langchain_classic.agents.output_parsers.react_single_input import (
 from langchain_classic.agents.format_scratchpad.log import format_log_to_str
 from typing import Union, List
 
+from callbacks import AgentCallbackHandler
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -72,6 +74,7 @@ Thought:{agent_scratchpad}
         temperature=0,
         stop_sequences=["\nObservation", "Observation", "Observation:"],
         # model_kwargs={"stop": ["\nObservation", "Observation", "Observation:"]}, # Gemini need this
+        callbacks=[AgentCallbackHandler()],
     )
 
     # Create a variable to keep track of the agent's scratchpad (its thoughts and observations)
