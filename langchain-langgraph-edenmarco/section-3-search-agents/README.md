@@ -13,4 +13,4 @@
 - [hwchase17/react - ReAct PromptTemplate](https://smith.langchain.com/hub/hwchase17/react)
 
 **Evolution of ReAct Agents:**
-![Evolution of ReAct Agents](/images/evolution_of_react_agents.png)
+![Evolution of ReAct Agents](/langchain-langgraph-edenmarco/section-3-search-agents/images/evolution_of_react_agents.png)
