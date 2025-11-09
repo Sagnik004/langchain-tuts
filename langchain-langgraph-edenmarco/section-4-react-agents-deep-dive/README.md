@@ -13,4 +13,4 @@
 - [Tools](https://docs.langchain.com/oss/python/langchain/tools)
 
 ### ReAct Agent Framework under the hood
-![ReAct Agent Framework under the hood](/images/react-agent-under-the-hood.png)
+![ReAct Agent Framework under the hood](/langchain-langgraph-edenmarco/section-4-react-agents-deep-dive/images/react-agent-under-the-hood.png)
