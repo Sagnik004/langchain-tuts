@@ -94,39 +94,33 @@ Thought:{agent_scratchpad}
         | ReActSingleInputOutputParser()
     )
 
-    # Invoke the agent, and extract what tool to use and its input.
-    # Sample response: tool='get_text_length' tool_input="'DOG'" log="To find the text length of 'DOG', I need to use the get_text_length tool.\n\nAction: get_text_length\nAction Input: 'DOG'"
-    agent_step_1: Union[AgentAction, AgentFinish] = agent.invoke(
-        {
-            "input": "What is the text length of 'DOG' in characters?",
-            "agent_scratchpad": intermediate_steps,
-        }
-    )
+    agent_step: Union[AgentAction, AgentFinish] = ""
 
-    # If LLM response have a tool, tool_input, log etc. basically of type AgentAction, then go ahead and
-    # call the tool after extracting out the tool name and input to be passed to it. Capture the observation,
-    # and store it into intermediate_steps.
-    if isinstance(agent_step_1, AgentAction):
-        tool_name = agent_step_1.tool
-        tool_to_use = find_tool_by_name(tools, tool_name)
-        tool_input = agent_step_1.tool_input
+    while not isinstance(agent_step, AgentFinish):
+      # Invoke the agent, and extract what tool to use and its input.
+      # Sample response: tool='get_text_length' tool_input="'DOG'" log="To find the text length of 'DOG', I need to use the get_text_length tool.\n\nAction: get_text_length\nAction Input: 'DOG'"
+      agent_step = agent.invoke(
+          {
+              "input": "What is the text length of 'DOG' in characters?",
+              "agent_scratchpad": intermediate_steps,
+          }
+      )
 
-        observation = tool_to_use.func(str(tool_input))
-        print(f"Observation={observation}")
-        intermediate_steps.append((agent_step_1, str(observation)))
+      # If LLM response have a tool, tool_input, log etc. basically of type AgentAction, then go ahead and
+      # call the tool after extracting out the tool name and input to be passed to it. Capture the observation,
+      # and store it into intermediate_steps.
+      if isinstance(agent_step, AgentAction):
+          tool_name = agent_step.tool
+          tool_to_use = find_tool_by_name(tools, tool_name)
+          tool_input = agent_step.tool_input
 
-    # Now, we can call the agent again with the updated intermediate_steps which now has the observation
-    # Sample response: return_values={'output': "The text length of 'DOG' in characters is 3."} log="I now know the final answer.\nFinal Answer: The text length of 'DOG' in characters is 3."
-    agent_step_2: Union[AgentAction, AgentFinish] = agent.invoke(
-        {
-            "input": "What is the text length of 'DOG' in characters?",
-            "agent_scratchpad": intermediate_steps,
-        }
-    )
+          observation = tool_to_use.func(str(tool_input))
+          print(f"Observation={observation}")
+          intermediate_steps.append((agent_step, str(observation)))
 
     # If we have the final response now which is of type AgentFinish, we can extract out the final output from it.
-    if isinstance(agent_step_2, AgentFinish):
-        print(f"Final Answer: {agent_step_2.return_values['output']}")
+    if isinstance(agent_step, AgentFinish):
+        print(f"Final Answer: {agent_step.return_values['output']}")
 
 
 if __name__ == "__main__":
