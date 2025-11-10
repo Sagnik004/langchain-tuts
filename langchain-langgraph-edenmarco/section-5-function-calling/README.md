@@ -23,3 +23,6 @@
 
 ### Function Calling Drawbacks
 ![Function Calling Drawbacks](/langchain-langgraph-edenmarco/section-5-function-calling/images/function_calling_drawback.png)
+
+### LangChain Function Calling Interface
+![LangChain Function Calling Interface](/langchain-langgraph-edenmarco/section-5-function-calling/images/langchain_function_calling_interface.png)
