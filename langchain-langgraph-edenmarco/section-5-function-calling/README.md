@@ -26,3 +26,6 @@
 
 ### LangChain Function Calling Interface
 ![LangChain Function Calling Interface](/langchain-langgraph-edenmarco/section-5-function-calling/images/langchain_function_calling_interface.png)
+
+### LLM Bind Tool Process
+![LLM Bind Tool Process](/langchain-langgraph-edenmarco/section-5-function-calling/images/llm_bind_tool_process.png)
