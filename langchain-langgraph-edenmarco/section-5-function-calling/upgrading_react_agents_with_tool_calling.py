@@ -1,9 +1,9 @@
-from typing import List
+from typing import List, Union
 
 from dotenv import load_dotenv
 from langchain.tools import BaseTool, tool
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, ToolMessage
 
 from callbacks import AgentCallbackHandler
 
@@ -36,7 +36,11 @@ if __name__ == "__main__":
     llm_with_tools = llm.bind_tools(tools)
 
     # Start conversation
-    messages = [HumanMessage(content="What are the length of the words DOG, ZEBRA and HIPPOPOTAMUS?")]
+    messages: List[Union[HumanMessage, AIMessage, ToolMessage]] = [
+        HumanMessage(
+            content="What are the length of the words DOG, MONKEY and GIRAFFE?"
+        )
+    ]
 
     while True:
         ai_message = llm_with_tools.invoke(messages)
@@ -55,10 +59,12 @@ if __name__ == "__main__":
                 observation = tool_to_use.invoke(tool_args)
                 print(f"observation={observation}")
 
-                messages.append(ToolMessage(content=str(observation), tool_call_id=tool_call_id))
+                messages.append(
+                    ToolMessage(content=str(observation), tool_call_id=tool_call_id)
+                )
             # Continue loop to allow the model to use the observations
             continue
-        
+
         # No tool calls -> final answer
         print(ai_message.content)
         break
