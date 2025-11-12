@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -8,3 +9,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# Load --> Split --> Embed --> Store in vector DB

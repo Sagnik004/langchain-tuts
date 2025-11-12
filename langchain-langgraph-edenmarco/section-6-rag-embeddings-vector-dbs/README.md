@@ -13,6 +13,7 @@
 
 ## Course Useful Packages, Tools Used
 
+- Vector DB used here is [pinecone](https://www.pinecone.io/).
 - The package manager used here is [uv](https://docs.astral.sh/uv/), this is similar to `pip` but `uv` is much faster since it is built using Rust.
 - Packages used: `langchain langchain-openai langchain-pinecone langchainhub python-dotenv black isort`
 
