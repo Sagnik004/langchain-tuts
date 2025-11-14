@@ -1,9 +1,10 @@
 import os
+
 from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters.character import CharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
+from langchain_text_splitters.character import CharacterTextSplitter
 
 # Load environment variables from .env file
 load_dotenv()
